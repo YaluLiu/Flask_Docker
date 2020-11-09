@@ -1,0 +1,16 @@
+from python:3.6
+
+COPY static /home/static
+COPY templates /home/templates
+COPY server.py /home
+COPY gunicorn.py /home
+
+RUN pip install flask \
+    && pip install flask-cors \
+    && pip install gunicorn
+
+WORKDIR      /home
+# ENTRYPOINT   ["python"]
+# CMD          ["server.py"]
+ENTRYPOINT   ["gunicorn"]
+CMD          ["-c","gunicorn.py", "server:app"]

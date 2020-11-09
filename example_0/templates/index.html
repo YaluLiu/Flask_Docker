@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title class="title_name">搜一下</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="/static/css/index.css">
+</head>
+
+<body>
+<div class="layui-row">
+  <div class="layui-col-xs6 layui-col-xs-offset3 main_content">
+    <img class="main_img" src="/static/img/logo.png">
+    <div>
+      <input type="text" name="content" required lay-verify="required" placeholder="请输入搜索内容" autocomplete="off" class="layui-input main_input"> 
+      <button type="button" class="layui-btn layui-btn-normal main_button">搜一下</button>
+    </div>
+    <div class="main_list">
+
+      <div class="main_item">
+        <div class="item_title">测试标题</div>
+        <div class="item_other">
+          <div class="item_auth">作者：<span class="auth">测试作者</span> &nbsp;&nbsp;语言：<span class="language">英语</span></div>
+          <div class="item_date">日期：<span class="date">2020-11-06</span></div>
+        </div>
+        <div class="item_content">测试内容</div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+
+<div class="hidden_temp">
+      <div class="main_item">
+        <div class="item_title">测试标题</div>
+        <div class="item_other">
+          <div class="item_auth">作者：<span class="auth">测试作者</span> &nbsp;&nbsp;语言：<span class="language">英语</span></div>
+          <div class="item_date">日期：<span class="date">2020-11-06</span></div>
+        </div>
+        <div class="item_content">测试内容</div>
+      </div>
+</div>
+  
+<script src="/static/js/jquery-min.js"></script>
+<script src="/static/plugins/layui/layui.all.js" charset="utf-8"></script>
+<script type="text/javascript">
+  $(function(){
+    $(".main_button").click(function(){
+      let content=$(".main_input").val();
+      if(!content){
+        layer.msg("请输入搜索内容");
+      }else{
+
+        //测试用途，使用时删除
+        let main_item=$(".hidden_temp>.main_item").clone();
+        main_item.find(".item_content").html(content);
+        $(".main_list").append(main_item);
+        return false;
+        //测试结束
+
+        $.post("http://www.baidu.com/",{content:content},function(res){
+          if(res.status){
+            let main_list=$(".main_list");
+            main_list.html("");
+            $.each(res.data,function(i,v){
+              let main_item=$("hidden_temp>main_item").clone();
+              main_item.find(".auth").html(v.auth);
+              main_item.find(".language").html(v.language);
+              main_item.find(".date").html(v.date);
+              main_item.find(".item_content").html(v.content);
+              main_list.append(main_item);
+            });
+          }
+        });
+      }
+    });
+  })
+</script>
+</body>
+
+</html>

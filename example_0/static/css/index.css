@@ -1,0 +1,50 @@
+    .main_content{
+      margin-top: 70px;
+      text-align: center;
+    }
+    .main_img{
+      width: 80%;
+    }
+    .main_input{
+      width: 70%;
+      display: inline-block;
+      height: 37px;
+      margin: 0px;
+    }
+    .main_button{
+      width:29%;
+      height: 37px;
+      margin: 0px;
+    }
+    .main_list{
+      margin-top: 20px;
+    }
+    .main_item{
+      height: 100px;
+      margin-top: 10px;
+      /*background-color: #666;*/
+      text-align: left;
+    }
+    .main_item:hover{
+      background-color:#DDD;
+    }
+    .item_title{
+      font-weight: bold;
+      font-size: 25px;
+      color: #2440b3;
+    }
+    .item_other div{
+      display: inline-block;
+      color: #999;
+    }
+    .item_auth{
+      width: 50%;
+    }
+    .item_date{
+      width: 47%;
+      text-align: right;
+      padding-right: 2%;
+    }
+    .hidden_temp{
+      display: none;
+    }
